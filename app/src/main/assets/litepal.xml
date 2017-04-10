@@ -1,0 +1,11 @@
+<litepal>
+    <dbname value="weathers"/>
+    <version value="1"/>
+
+    <list>
+        <mapping class="com.gaojun.hasee.weathers.db.Province"/>
+        <mapping class="com.gaojun.hasee.weathers.db.City"/>
+        <mapping class="com.gaojun.hasee.weathers.db.county"/>
+    </list>
+
+</litepal>
