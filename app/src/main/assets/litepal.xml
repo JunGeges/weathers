@@ -5,7 +5,7 @@
     <list>
         <mapping class="com.gaojun.hasee.weathers.db.Province"/>
         <mapping class="com.gaojun.hasee.weathers.db.City"/>
-        <mapping class="com.gaojun.hasee.weathers.db.county"/>
+        <mapping class="com.gaojun.hasee.weathers.db.County"/>
     </list>
 
 </litepal>
