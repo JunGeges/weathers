@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Weathers</string>
+    <string name="forecast">预报</string>
 </resources>
