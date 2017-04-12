@@ -1,8 +1,8 @@
+package com.gaojun.hasee.weathers;
+
 import android.app.ProgressDialog;
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +13,6 @@ import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.gaojun.hasee.weathers.R;
 import com.gaojun.hasee.weathers.db.City;
 import com.gaojun.hasee.weathers.db.County;
 import com.gaojun.hasee.weathers.db.Province;
@@ -35,7 +34,7 @@ import okhttp3.Response;
  */
 
 public class ChooseAreaFragment extends Fragment {
-    private static final String TAG = "ChooseAreaFragment";
+    private static final String TAG = "com.gaojun.hasee.weathers.ChooseAreaFragment";
     public static final int LEVEL_PROVINCE = 0;
     public static final int LEVEL_CITY = 1;
     public static final int LEVEL_COUNTY = 2;
@@ -60,9 +59,8 @@ public class ChooseAreaFragment extends Fragment {
 
     private int currentLevel;//当前等级
 
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.choose_area, container, false);
         backBtn = (Button) view.findViewById(R.id.back_button);
         titleText = (TextView) view.findViewById(R.id.title_text);
@@ -74,7 +72,7 @@ public class ChooseAreaFragment extends Fragment {
 
     //当这个fragment依附的activity初始化完成时的回调
     @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
+    public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         mListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -121,7 +119,6 @@ public class ChooseAreaFragment extends Fragment {
         }else {
             int selectProvinceCode=selectedProvince.getProvinceCode();
             int selectCityCode=selectedCity.getCityCode();
-            Log.d(TAG, "queryCounties: "+selectProvinceCode+"---"+selectCityCode);
             String address="http://guolin.tech/api/china/"+selectProvinceCode+"/"+selectCityCode;
             queryFromServer(address,"county");
         }
@@ -144,7 +141,6 @@ public class ChooseAreaFragment extends Fragment {
             currentLevel=LEVEL_CITY;
         }else {
             int provinceCode=selectedProvince.getProvinceCode();
-            Log.d(TAG, "queryCities: "+provinceCode);
             String address="http://guolin.tech/api/china/"+provinceCode;
             queryFromServer(address,"city");
         }
