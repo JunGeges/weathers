@@ -85,11 +85,20 @@ public class ChooseAreaFragment extends Fragment {
                     selectedCity = mCityList.get(i);
                     queryCounties();
                 }else if(currentLevel==LEVEL_COUNTY){
-                    String weatherId = mCountyList.get(i).getWeatherId();
-                    Intent intent=new Intent(getActivity(),WeatherActivity.class);
-                    intent.putExtra("weather_id",weatherId);
-                    startActivity(intent);
-                    getActivity().finish();
+                    String countyName = mCountyList.get(i).getCountyName();
+                    //判断fragment当前是在哪个Activity环境下
+                    if(getActivity()instanceof MainActivity){
+                        Intent intent=new Intent(getActivity(),WeatherActivity.class);
+                        intent.putExtra("county_name",countyName);
+                        startActivity(intent);
+                        getActivity().finish();
+                    }else if(getActivity()instanceof WeatherActivity){
+                        WeatherActivity activity = (WeatherActivity) getActivity();
+                        activity.mDrawerLayout.closeDrawers();//关闭侧滑
+                        activity.mSwipeRefreshLayout.setRefreshing(true);//直接刷新当前
+                        activity.requestWeather(countyName);
+                    }
+
                 }
             }
         });
@@ -234,8 +243,10 @@ public class ChooseAreaFragment extends Fragment {
         mProgressDialog.show();
     }
 
-    private void closeProgressDialog() {
-        if (mProgressDialog != null) {
+    private void closeProgressDialog()
+    {
+        if (mProgressDialog != null)
+        {
             mProgressDialog.dismiss();
         }
     }

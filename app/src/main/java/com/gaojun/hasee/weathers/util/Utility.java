@@ -5,7 +5,7 @@ import android.text.TextUtils;
 import com.gaojun.hasee.weathers.db.City;
 import com.gaojun.hasee.weathers.db.County;
 import com.gaojun.hasee.weathers.db.Province;
-import com.gaojun.hasee.weathers.gson.Weather;
+import com.gaojun.hasee.weathers.gson.HeWeather5Bean;
 import com.google.gson.Gson;
 
 import org.json.JSONArray;
@@ -88,12 +88,12 @@ public class Utility {
         return false;
     }
 
-    public  static Weather handleWeatherResponse(String response){
+    public  static HeWeather5Bean handleWeatherResponse(String response){
         try {
             JSONObject jsonObject=new JSONObject(response);
-            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather");
+            JSONArray jsonArray = jsonObject.getJSONArray("HeWeather5");
             String weatherContent = jsonArray.get(0).toString();
-            return new Gson().fromJson(weatherContent,Weather.class);
+            return new Gson().fromJson(weatherContent,HeWeather5Bean.class);
         } catch (JSONException e) {
             e.printStackTrace();
         }
